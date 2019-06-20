@@ -65,7 +65,7 @@ public class Painting : MonoBehaviour
 
     public void SetColor(Color color)
     {
-       // this.color = Enumerable.Repeat<Color>(color, penSize * penSize).ToArray<Color>();
+        this.color = Enumerable.Repeat<Color>(color, penSize * penSize).ToArray<Color>();
 
     }
     
