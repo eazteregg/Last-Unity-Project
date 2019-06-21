@@ -24,8 +24,19 @@ public class Spawn : MonoBehaviour
         scale = new Vector3(5, 5, 5);
        PositionInFrontOfWand();
        rb = GetComponent<Rigidbody>();
-       Debug.Log(rb.ToString());
-        beingShot = false;
+        
+        Debug.Log("Calling Start");
+    }
+
+    public void Awake()
+    {
+        Debug.Log("Calling Awake");
+        fireballManager = transform.parent.gameObject.GetComponent<FireballManagement>();
+        scale = new Vector3(5, 5, 5);
+        PositionInFrontOfWand();
+        rb = GetComponent<Rigidbody>();
+       
+       
     }
 
     // Update is called once per frame
@@ -44,6 +55,11 @@ public class Spawn : MonoBehaviour
 
     public void SpawnFireball()
     {
+        Debug.Log("Calling SpawnFireball");
+        if (fireballManager == null)
+        {
+            fireballManager = transform.parent.gameObject.GetComponent<FireballManagement>();
+        }
         lifetime = fireballManager.fireBallLifetime;
         gameObject.SetActive(true);
  

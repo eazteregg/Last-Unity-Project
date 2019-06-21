@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 public class ShootVR : MonoBehaviour
 {
@@ -8,14 +9,15 @@ public class ShootVR : MonoBehaviour
     public GameObject fireballManager;
     public GameObject lightningManager;
     private FireballManagement fireballManagement;
-    
+    public SteamVR_Action_Boolean pinchAction;
+    public SteamVR_Input_Sources handType;
 
     // Start is called before the first frame update
 
     void Start()
     {
         fireballManagement = fireballManager.GetComponent<FireballManagement>();
-        lightningManagement = lightningManagement.GetComponent<LightningManagement>();
+        //lightningManagement = lightningManagement.GetComponent<LightningManagement>();
         Spell = "Fireball";
         Transform[] spells = GetComponentsInChildren<Transform>();
         foreach (Transform t in spells)
@@ -31,7 +33,7 @@ public class ShootVR : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButton("SwitchSpell"))
+        if (false)
         {
             if (Spell == "Fireball")
             {
@@ -42,19 +44,19 @@ public class ShootVR : MonoBehaviour
                 Spell = "Fireball";
             }
         }
-        if (Input.GetButton("Fire1"))
+        if (pinchAction.GetStateDown(handType))
         {
             Debug.Log("Fire1");
-
+            //Debug.Log(Spell);
             if (Spell == "Fireball")
             {
-
+                Debug.Log("Spawning Fireball!");
                 fireballManagement.SpawnFireball();
             }
 
             if (Spell == "Lightning")
             {
-                lightningManagement.SpawnLightning();
+                //lightningManagement.SpawnLightning();
             }
         }
 

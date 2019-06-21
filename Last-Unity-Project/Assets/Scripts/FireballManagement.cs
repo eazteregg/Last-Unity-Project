@@ -19,13 +19,15 @@ public class FireballManagement : MonoBehaviour
         int maxFireballs = Mathf.CeilToInt(fireBallLifetime * fireBallsPerSecond);
         Debug.Log(maxFireballs.ToString());
         fireballs.Push(origFireball);
-
+        origFireball.SetActive(false);
+        
         for (int i=1; i < maxFireballs; i++)
         {
-            
-            fireballs.Push(Instantiate(origFireball, parent:transform));
+            GameObject newFireball = Instantiate(origFireball, parent: transform);
+            newFireball.GetComponent<Spawn>().Awake();
+            fireballs.Push(newFireball);
         }
-
+        
     }
 
     private void Update()
@@ -40,8 +42,11 @@ public class FireballManagement : MonoBehaviour
 
     public void SpawnFireball()
     {
+        Debug.Log(coolDown.ToString());
+        
         if (coolDown <= 0)
         {
+            Debug.Log(fireballs.Count);
             GameObject fireball = fireballs.Pop();
             fireball.GetComponent<Spawn>().SpawnFireball();
             coolDown = 1 / fireBallsPerSecond;
