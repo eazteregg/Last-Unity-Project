@@ -7,6 +7,8 @@ public class Shoot : MonoBehaviour
     string Spell;
     public Camera camera;
     public GameObject fireballManager;
+    public GameObject lightningManager;
+    private LightningManagement lightningManagement;
     private FireballManagement fireballManagement;
 
     // Start is called before the first frame update
@@ -14,7 +16,8 @@ public class Shoot : MonoBehaviour
     void Start()
     {
         fireballManagement = fireballManager.GetComponent<FireballManagement>();
-        
+        lightningManagement = lightningManager.GetComponent<LightningManagement>();
+
         Spell = "Fireball";
         Transform[] spells = GetComponentsInChildren<Transform>();
         foreach (Transform t in spells)
@@ -47,7 +50,30 @@ public class Shoot : MonoBehaviour
                 
                 fireballManagement.SpawnFireball();
             }
+            else if (Spell == "Lightning")
+            {
+                lightningManagement.ActivateLightning();
+            }
         }
+
+        if (Input.GetButtonUp("Fire1") && lightningManager.active)
+        {
+            lightningManagement.DeactivateLightning();
+        }
+        
+        if (Input.GetButtonDown("Fire2"))
+        {
+            if (Spell == "Fireball")
+            {
+                Spell = "Lightning";
+            }
+            else if( Spell == "Lightning")
+            {
+                Spell = "Fireball";
+            }
+        }
+
+
         
     }
 }

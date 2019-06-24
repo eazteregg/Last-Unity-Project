@@ -21,7 +21,7 @@ public class Spawn : MonoBehaviour
     void Start()
     {
         fireballManager = transform.parent.gameObject.GetComponent<FireballManagement>();
-        scale = new Vector3(5, 5, 5);
+        scale = new Vector3(2, 2, 2);
        PositionInFrontOfWand();
        rb = GetComponent<Rigidbody>();
         
@@ -32,7 +32,7 @@ public class Spawn : MonoBehaviour
     {
         Debug.Log("Calling Awake");
         fireballManager = transform.parent.gameObject.GetComponent<FireballManagement>();
-        scale = new Vector3(5, 5, 5);
+        scale = new Vector3(2, 2, 2);
         PositionInFrontOfWand();
         rb = GetComponent<Rigidbody>();
        
