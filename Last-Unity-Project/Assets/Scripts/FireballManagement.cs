@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
+using Valve.VR.InteractionSystem;
 
 public class FireballManagement : MonoBehaviour
 {
@@ -9,8 +12,12 @@ public class FireballManagement : MonoBehaviour
     public float fireBallsPerSecond;
     private float coolDown;
     GameObject origFireball;
+    
 
     // Start is called before the first frame update
+    
+    
+    
     void Start()
     {
         fireballs = new Stack<GameObject>();
@@ -24,7 +31,8 @@ public class FireballManagement : MonoBehaviour
         for (int i=1; i < maxFireballs; i++)
         {
             GameObject newFireball = Instantiate(origFireball, parent: transform);
-            newFireball.GetComponent<Spawn>().Awake();
+            Spawn spawn = newFireball.GetComponent<Spawn>();
+            spawn.SetFireballManager(transform);
             fireballs.Push(newFireball);
         }
         
@@ -42,16 +50,43 @@ public class FireballManagement : MonoBehaviour
 
     public void SpawnFireball()
     {
+        
+        
         Debug.Log(coolDown.ToString());
         
         if (coolDown <= 0)
         {
-            Debug.Log(fireballs.Count);
+           
             GameObject fireball = fireballs.Pop();
-            fireball.GetComponent<Spawn>().SpawnFireball();
+            Spawn spawn = fireball.GetComponent<Spawn>();
+            
+            
+            spawn.SpawnFireball();
             coolDown = 1 / fireBallsPerSecond;
         }
+   
         
+    }
+
+    public GameObject SpawnAttachableFireball()
+    {
+        if (coolDown <= 0)
+        {
+           
+            GameObject fireball = fireballs.Pop();
+            fireball.GetComponent<Interactable>().enabled = true;
+            Spawn spawn = fireball.GetComponent<Spawn>();
+            spawn.SpawnAttachableFireball();
+            coolDown = 1 / fireBallsPerSecond;
+
+            return fireball;
+
+        }
+
+        return null;
+
+
+
     }
     private void OnApplicationQuit()
     {

@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using Valve.VR;
+using Valve.VR.InteractionSystem;
 
-public class ShootVR : MonoBehaviour
+public class ThrowVR : MonoBehaviour
 {
     string Spell;
     public GameObject fireballManager;
@@ -13,29 +13,28 @@ public class ShootVR : MonoBehaviour
     [SerializeField] private SteamVR_Action_Boolean pinchAction;
     [SerializeField] private SteamVR_Action_Boolean grabAction;
     public SteamVR_Input_Sources handType;
+    private Hand hand;
+    private bool fireballAttached;
+    private GameObject attachedFireball;
 
     // Start is called before the first frame update
 
     void Start()
     {
+        hand = GetComponent<Hand>();
         fireballManagement = fireballManager.GetComponent<FireballManagement>();
         lightningManagement = lightningManager.GetComponent<LightningManagement>();
         Spell = "Fireball";
-        Transform[] spells = GetComponentsInChildren<Transform>();
-        foreach (Transform t in spells)
-        {
-            if (t != transform)
-            {
-                t.gameObject.SetActive(false);
-            }
-        }
+        
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (grabAction.GetStateDown(handType))
+        
+        
+        if (hand.grabGripAction.GetStateDown(handType))
         {
             Debug.Log("Switching spell...");
             if (Spell == "Fireball")
@@ -48,19 +47,25 @@ public class ShootVR : MonoBehaviour
             }
         }
 
-        if (pinchAction.GetStateUp(handType) && lightningManager.activeSelf)
+        if (hand.grabPinchAction.GetStateUp(handType))
         {
-            lightningManagement.DeactivateLightning();
+            if (Spell == "Lightning" && lightningManager.activeSelf)
+            {
+                lightningManagement.DeactivateLightning();
+            }
+
         }
 
-    if (pinchAction.GetState(handType)) 
+        if (hand.grabPinchAction.GetState(handType))
         {
             Debug.Log("Fire1");
             //Debug.Log(Spell);
-            if (Spell == "Fireball")
+            if (Spell == "Fireball" && !hand.ObjectIsAttached(attachedFireball))
             {
                 Debug.Log("Spawning Fireball!");
-                fireballManagement.SpawnFireball();
+                attachedFireball = fireballManagement.SpawnAttachableFireball();
+                if (attachedFireball != null)
+                hand.AttachObject(attachedFireball, GrabTypes.Pinch);
             }
 
             if (Spell == "Lightning")
@@ -71,4 +76,3 @@ public class ShootVR : MonoBehaviour
 
     }
 }
-
