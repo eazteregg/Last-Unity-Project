@@ -13,6 +13,7 @@ public class LightningManagement : MonoBehaviour
     void Start()
     {
         lightning = transform.GetChild(0).gameObject;
+        lightning.SetActive(false);
         
     }
 

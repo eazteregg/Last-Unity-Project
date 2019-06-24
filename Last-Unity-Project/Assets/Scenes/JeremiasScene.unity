@@ -439,7 +439,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OFFSET: 0
-  wandPivot: {fileID: 1489654224}
+  wandPivot: {fileID: 1932528519}
 --- !u!4 &696800292
 Transform:
   m_ObjectHideFlags: 0
@@ -481,7 +481,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 534669904}
   fireballManager: {fileID: 1232559569}
-  lightningManager: {fileID: 696800290}
+  lightningManager: {fileID: 0}
 --- !u!114 &711878310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,6 +499,9 @@ MonoBehaviour:
   pinchAction:
     actionPath: /actions/default/in/GrabPinch
     needsReinit: 0
+  grabAction:
+    actionPath: 
+    needsReinit: 0
   handType: 2
 --- !u!1001 &770527791
 PrefabInstance:
@@ -513,7 +516,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 146900, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 420908, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -562,11 +565,11 @@ PrefabInstance:
     - target: {fileID: 2348914, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 810536170}
+      objectReference: {fileID: 1235397134}
     - target: {fileID: 3380982, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 1238255830}
+      objectReference: {fileID: 1413442498}
     - target: {fileID: 192944, guid: 4d293c8e162f3874b982baadd71153d2, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -583,40 +586,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 770527791}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &810536170
-Material:
-  serializedVersion: 6
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Sprites/Default
-  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _AlphaTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Floats:
-    - PixelSnap: 0
-    - _EnableExternalAlpha: 0
-    m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Flip: {r: 1, g: 1, b: 1, a: 1}
-    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1015533818
 GameObject:
   m_ObjectHideFlags: 0
@@ -5366,7 +5335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8b7ec365a34984ca2fea4168d27935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wandPivot: {fileID: 1489654224}
+  wandPivot: {fileID: 1932528519}
   THRUST: 3000
   OFFSET: 0.01
 --- !u!1 &1046995373
@@ -10218,7 +10187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da810fe234e3ec44d89efc3e9ce1ad83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireBallLifetime: 0.5
+  fireBallLifetime: 4
   fireBallsPerSecond: 5
 --- !u!4 &1232559571
 Transform:
@@ -10235,7 +10204,152 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!43 &1238255830
+--- !u!21 &1235397134
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Sprites/Default
+  m_Shader: {fileID: 10753, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _AlphaTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - PixelSnap: 0
+    - _EnableExternalAlpha: 0
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Flip: {r: 1, g: 1, b: 1, a: 1}
+    - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1 &1371037665 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100006, guid: 8b6cad0286562c347b1f39412566e642,
+    type: 3}
+  m_PrefabInstance: {fileID: 324823581}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1371037666 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400006, guid: 8b6cad0286562c347b1f39412566e642,
+    type: 3}
+  m_PrefabInstance: {fileID: 324823581}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1371037667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371037665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32e43837f3719f04284550964f1292d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireballManager: {fileID: 1232559569}
+  lightningManager: {fileID: 696800290}
+  pinchAction:
+    actionPath: /actions/default/in/GrabPinch
+    needsReinit: 0
+  grabAction:
+    actionPath: /actions/default/in/GrabGrip
+    needsReinit: 0
+  handType: 2
+--- !u!114 &1371037669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371037665}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e31772239eab4e428727fbb1efdd9ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 534669904}
+  fireballManager: {fileID: 1232559569}
+  lightningManager: {fileID: 696800290}
+--- !u!114 &1371037671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371037665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f260935093f73f241bfaa1578e5e5506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teleportAction:
+    actionPath: /actions/default/in/Teleport
+    needsReinit: 0
+  traceLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  floorFixupTraceLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  floorFixupMaximumTraceDistance: 1
+  areaVisibleMaterial: {fileID: 2100000, guid: 417e639b66cd3a24e9c5312be99ce3bd, type: 2}
+  areaLockedMaterial: {fileID: 2100000, guid: f6802bd638faedf4dbe4a57c1f222991, type: 2}
+  areaHighlightedMaterial: {fileID: 2100000, guid: a8cac5516702311429fe7478ff4d7d05,
+    type: 2}
+  pointVisibleMaterial: {fileID: 2100000, guid: 510c6e0b8b5c948458c2b4bc3de5a637,
+    type: 2}
+  pointLockedMaterial: {fileID: 2100000, guid: f855134cdd14ab54fa2838027b3eec2f, type: 2}
+  pointHighlightedMaterial: {fileID: 2100000, guid: f71819766ca687246a2150260bcfc1c5,
+    type: 2}
+  destinationReticleTransform: {fileID: 400006, guid: e61c6399d5478fc4bbfbdb7ccc35cca1,
+    type: 3}
+  invalidReticleTransform: {fileID: 400000, guid: 6e0f456570268ff49a58a019080ee045,
+    type: 3}
+  playAreaPreviewCorner: {fileID: 0}
+  playAreaPreviewSide: {fileID: 0}
+  pointerValidColor: {r: 0, g: 0, b: 0, a: 0}
+  pointerInvalidColor: {r: 0, g: 0, b: 0, a: 0}
+  pointerLockedColor: {r: 0, g: 0, b: 0, a: 0}
+  showPlayAreaMarker: 1
+  teleportFadeTime: 0.1
+  meshFadeTime: 0.2
+  arcDistance: 10
+  onActivateObjectTransform: {fileID: 0}
+  onDeactivateObjectTransform: {fileID: 0}
+  activateObjectTime: 1
+  deactivateObjectTime: 1
+  pointerAudioSource: {fileID: 0}
+  loopingAudioSource: {fileID: 0}
+  headAudioSource: {fileID: 0}
+  reticleAudioSource: {fileID: 0}
+  teleportSound: {fileID: 0}
+  pointerStartSound: {fileID: 0}
+  pointerLoopSound: {fileID: 0}
+  pointerStopSound: {fileID: 0}
+  goodHighlightSound: {fileID: 0}
+  badHighlightSound: {fileID: 0}
+  debugFloor: 0
+  showOffsetReticle: 0
+  offsetReticleTransform: {fileID: 0}
+  floorDebugSphere: {fileID: 0}
+  floorDebugLine: {fileID: 0}
+--- !u!43 &1413442498
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10395,51 +10509,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1371037665 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100006, guid: 8b6cad0286562c347b1f39412566e642,
-    type: 3}
-  m_PrefabInstance: {fileID: 324823581}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1371037666 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400006, guid: 8b6cad0286562c347b1f39412566e642,
-    type: 3}
-  m_PrefabInstance: {fileID: 324823581}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1371037667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1371037665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32e43837f3719f04284550964f1292d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireballManager: {fileID: 1232559569}
-  lightningManager: {fileID: 0}
-  pinchAction:
-    actionPath: /actions/default/in/GrabPinch
-    needsReinit: 0
-  handType: 2
---- !u!114 &1371037669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1371037665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e31772239eab4e428727fbb1efdd9ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camera: {fileID: 534669904}
-  fireballManager: {fileID: 1232559569}
-  lightningManager: {fileID: 0}
 --- !u!1 &1489654222
 GameObject:
   m_ObjectHideFlags: 0
@@ -10456,7 +10525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1489654223
 MonoBehaviour:
   m_ObjectHideFlags: 0

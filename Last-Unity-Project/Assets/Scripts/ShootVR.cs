@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
+using VRTK.SecondaryControllerGrabActions;
 
 public class ShootVR : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class ShootVR : MonoBehaviour
     public GameObject fireballManager;
     public GameObject lightningManager;
     private FireballManagement fireballManagement;
-    public SteamVR_Action_Boolean pinchAction;
+    private LightningManagement lightningManagement;
+    [SerializeField] private SteamVR_Action_Boolean pinchAction;
+    [SerializeField] private SteamVR_Action_Boolean grabAction;
     public SteamVR_Input_Sources handType;
 
     // Start is called before the first frame update
@@ -17,7 +20,7 @@ public class ShootVR : MonoBehaviour
     void Start()
     {
         fireballManagement = fireballManager.GetComponent<FireballManagement>();
-        //lightningManagement = lightningManagement.GetComponent<LightningManagement>();
+        lightningManagement = lightningManager.GetComponent<LightningManagement>();
         Spell = "Fireball";
         Transform[] spells = GetComponentsInChildren<Transform>();
         foreach (Transform t in spells)
@@ -33,8 +36,9 @@ public class ShootVR : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (false)
+        if (grabAction.GetStateDown(handType))
         {
+            Debug.Log("Switching spell...");
             if (Spell == "Fireball")
             {
                 Spell = "Lightning";
@@ -44,7 +48,13 @@ public class ShootVR : MonoBehaviour
                 Spell = "Fireball";
             }
         }
-        if (pinchAction.GetStateDown(handType))
+
+        if (pinchAction.GetStateUp(handType) && lightningManager.activeSelf)
+        {
+            lightningManagement.DeactivateLightning();
+        }
+
+    if (pinchAction.GetState(handType)) 
         {
             Debug.Log("Fire1");
             //Debug.Log(Spell);
@@ -56,7 +66,7 @@ public class ShootVR : MonoBehaviour
 
             if (Spell == "Lightning")
             {
-                //lightningManagement.SpawnLightning();
+                lightningManagement.ActivateLightning();
             }
         }
 
