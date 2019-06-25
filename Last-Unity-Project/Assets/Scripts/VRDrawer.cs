@@ -3,7 +3,7 @@ using System.Collections;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
 
-public class Drawer : MonoBehaviour
+public class VRDrawer : MonoBehaviour
 {
     public Camera cam;
     public int SIZE;

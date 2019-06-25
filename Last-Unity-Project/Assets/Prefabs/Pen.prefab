@@ -101,6 +101,8 @@ MonoBehaviour:
   objectHighlighter: {fileID: 0}
   touchHighlightColor: {r: 0.8207547, g: 0.47622594, b: 0.05032932, a: 0}
   usingState: 0
+  painting: {fileID: 0}
+  distance: 0
 --- !u!114 &5256702820234983524
 MonoBehaviour:
   m_ObjectHideFlags: 0
