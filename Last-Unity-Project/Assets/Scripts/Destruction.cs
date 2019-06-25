@@ -32,4 +32,12 @@ public class Destruction : MonoBehaviour
             hitpoints -= other.gameObject.GetComponent<Damage>().getDamage() * Time.deltaTime;
         }
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Spell")
+        {
+            hitpoints -= other.gameObject.GetComponent<Damage>().getDamage();
+        }
+    }
 }

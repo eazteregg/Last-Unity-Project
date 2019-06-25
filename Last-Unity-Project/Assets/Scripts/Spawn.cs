@@ -7,7 +7,7 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Spawn : MonoBehaviour
 {
-    FireballManagement fireballManagement;
+    //FireballManagement fireballManagement;
     Vector3 offsetPosition;
     Quaternion offsetRotation;
     Rigidbody rb;
@@ -22,15 +22,16 @@ public class Spawn : MonoBehaviour
 
     // Start is called before the first frame update
 
-    void Start()
+    void Awake()
     {
+       
+        Debug.Log("Calling Start");
         fireballManager = transform.parent;
-        fireballManagement = transform.parent.gameObject.GetComponent<FireballManagement>();
+        //fireballManagement = transform.parent.gameObject.GetComponent<FireballManagement>();
         scale = new Vector3(2, 2, 2);
        PositionInFrontOfWand();
-       rb = GetComponent<Rigidbody>();
+       rb = gameObject.GetComponent<Rigidbody>();
         
-        Debug.Log("Calling Start");
     }
 
     // Update is called once per frame
@@ -54,11 +55,8 @@ public class Spawn : MonoBehaviour
     public void SpawnAttachableFireball()
     {
         Debug.Log("Calling SpawnFireball");
-        if (fireballManagement == null)
-        {
-            fireballManagement = transform.parent.gameObject.GetComponent<FireballManagement>();
-        }
-        lifetime = fireballManagement.fireBallLifetime;
+       
+        lifetime = FireballManagement.instance.fireBallLifetime;
         gameObject.SetActive(true);
  
         rb.velocity = Vector3.zero;
@@ -72,11 +70,8 @@ public class Spawn : MonoBehaviour
     public void SpawnFireball()
     {
         Debug.Log("Calling SpawnFireball");
-        if (fireballManagement == null)
-        {
-            fireballManagement = transform.parent.gameObject.GetComponent<FireballManagement>();
-        }
-        lifetime = fireballManagement.fireBallLifetime;
+        
+        lifetime = FireballManagement.instance.fireBallLifetime;
         gameObject.SetActive(true);
  
         rb.velocity = Vector3.zero;
@@ -95,7 +90,7 @@ public class Spawn : MonoBehaviour
     {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        fireballManagement.Push(gameObject);
+        FireballManagement.instance.Push(gameObject);
         gameObject.SetActive(false);
         transform.localScale = scale;
         beingShot = false;
@@ -148,7 +143,7 @@ public class Spawn : MonoBehaviour
     public void SetBeingShot()
     {
         transform.parent = fireballManager;
-        Debug.Log("Being Shot");
+        //Debug.Log("Being Shot");
         beingShot = true;
     }
    

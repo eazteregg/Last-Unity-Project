@@ -6,8 +6,8 @@ using Valve.VR.InteractionSystem;
 public class ThrowVR : MonoBehaviour
 {
     string Spell;
-    public GameObject fireballManager;
-    public GameObject lightningManager;
+//    public GameObject fireballManager;
+//    public GameObject lightningManager;
     private FireballManagement fireballManagement;
     private LightningManagement lightningManagement;
     [SerializeField] private SteamVR_Action_Boolean pinchAction;
@@ -21,9 +21,10 @@ public class ThrowVR : MonoBehaviour
 
     void Start()
     {
-        hand = GetComponent<Hand>();
-        fireballManagement = fireballManager.GetComponent<FireballManagement>();
-        lightningManagement = lightningManager.GetComponent<LightningManagement>();
+        hand = gameObject.GetComponent<Hand>();
+//        fireballManagement = FireballManagement.instance;
+//        fireballManagement = fireballManager.GetComponent<FireballManagement>();
+//        lightningManagement = lightningManager.GetComponent<LightningManagement>();
         Spell = "Fireball";
         
 
@@ -33,46 +34,50 @@ public class ThrowVR : MonoBehaviour
     void Update()
     {
         
-        
-        if (hand.grabGripAction.GetStateDown(handType))
+        if (hand != null)
         {
-            Debug.Log("Switching spell...");
-            if (Spell == "Fireball")
+        //Debug.Log("Hand: " + hand);
+        //Debug.Log("Hand.grabGripAction: " + hand.grabGripAction);
+            if (hand.grabGripAction.GetStateDown(handType))
             {
-                Spell = "Lightning";
+                Debug.Log("Switching spell...");
+                if (Spell == "Fireball")
+                {
+                    Spell = "Lightning";
+                }
+                else if (Spell == "Lightning")
+                {
+                    Spell = "Fireball";
+                }
             }
-            else if (Spell == "Lightning")
+
+            if (hand.grabPinchAction.GetStateUp(handType))
             {
-                Spell = "Fireball";
+                if (Spell == "Lightning" && LightningManagement.instance.LightningActive())
+                {
+                    LightningManagement.instance.DeactivateLightning();
+                }
+            }
+
+            if (hand.grabPinchAction.GetState(handType))
+            {
+                Debug.Log("Fire1");
+                //Debug.Log(Spell);
+                if (Spell == "Fireball" && !hand.ObjectIsAttached(attachedFireball))
+                {
+                    Debug.Log("Spawning Fireball!");
+
+                    attachedFireball = FireballManagement.instance.SpawnAttachableFireball();
+                    if (attachedFireball != null)
+                        hand.AttachObject(attachedFireball, GrabTypes.Pinch);
+                }
+
+                if (Spell == "Lightning")
+                {
+                    LightningManagement.instance.ActivateLightning();
+                }
             }
         }
-
-        if (hand.grabPinchAction.GetStateUp(handType))
-        {
-            if (Spell == "Lightning" && lightningManager.activeSelf)
-            {
-                lightningManagement.DeactivateLightning();
-            }
-
         }
 
-        if (hand.grabPinchAction.GetState(handType))
-        {
-            Debug.Log("Fire1");
-            //Debug.Log(Spell);
-            if (Spell == "Fireball" && !hand.ObjectIsAttached(attachedFireball))
-            {
-                Debug.Log("Spawning Fireball!");
-                attachedFireball = fireballManagement.SpawnAttachableFireball();
-                if (attachedFireball != null)
-                hand.AttachObject(attachedFireball, GrabTypes.Pinch);
-            }
-
-            if (Spell == "Lightning")
-            {
-                lightningManagement.ActivateLightning();
-            }
-        }
-
-    }
 }

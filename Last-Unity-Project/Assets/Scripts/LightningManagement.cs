@@ -5,6 +5,18 @@ using UnityEngine;
 public class LightningManagement : MonoBehaviour
 {
 
+    #region Singleton
+
+    public static LightningManagement instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
+    #endregion
+    
     public float OFFSET;
     public Transform wandPivot;
     GameObject lightning;

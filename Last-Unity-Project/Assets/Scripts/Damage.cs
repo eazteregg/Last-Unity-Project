@@ -20,6 +20,7 @@ public class Damage : MonoBehaviour
 
     public float getDamage()
     {
+        Debug.Log("Dealing damage");
         return damage;
     }
 }

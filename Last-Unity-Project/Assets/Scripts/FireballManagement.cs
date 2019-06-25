@@ -7,12 +7,29 @@ using Valve.VR.InteractionSystem;
 
 public class FireballManagement : MonoBehaviour
 {
+    
+#region Singleton
+
+public static FireballManagement instance;
+
+private void Awake()
+{
+    if (instance == null)
+        instance = this;
+}
+
+#endregion
+    
+    
+    
     Stack<GameObject> fireballs;
     public float fireBallLifetime;
     public float fireBallsPerSecond;
     private float coolDown;
     GameObject origFireball;
     
+
+
 
     // Start is called before the first frame update
     
@@ -41,6 +58,10 @@ public class FireballManagement : MonoBehaviour
     private void Update()
     {
         coolDown -= 1 * Time.deltaTime;
+        if (fireballs.Count == 0)
+        {
+            Debug.LogWarning("StackEmpty");
+        }
     }
 
     public void Push(GameObject fireball)
