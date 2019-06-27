@@ -18,20 +18,28 @@ public class Spawn : MonoBehaviour
     float lifetime;
     bool beingShot;
     private Transform fireballManager;
+    private ParticleSystem fireballParticle;
+    private ParticleSystem fireballTrails;
+    private Explode explosion;
+    private bool exploding;
+    private CapsuleCollider fireballCollider;
 
 
     // Start is called before the first frame update
 
     void Awake()
     {
-       
-        Debug.Log("Calling Start");
+        Debug.Log("Calling Awake");
         fireballManager = transform.parent;
         //fireballManagement = transform.parent.gameObject.GetComponent<FireballManagement>();
         scale = new Vector3(2, 2, 2);
-       PositionInFrontOfWand();
-       rb = gameObject.GetComponent<Rigidbody>();
-        
+        rb = gameObject.GetComponent<Rigidbody>();
+        fireballParticle = transform.GetChild(0).GetComponent<ParticleSystem>();
+        Debug.Log("FireballParticle:" + fireballParticle);
+        fireballTrails = transform.GetChild(1).GetComponent<ParticleSystem>();
+        explosion = transform.GetChild(2).GetComponent<Explode>();
+        explosion.gameObject.SetActive(false);
+        fireballCollider = GetComponent<CapsuleCollider>();
     }
 
     // Update is called once per frame
@@ -44,25 +52,32 @@ public class Spawn : MonoBehaviour
             transform.forward = target;
             if (lifetime <= 0)
             {
-                DestroyFireball();
+               Explode();
             }
         }
 
-       
-
+        if (exploding)
+        {
+            if (explosion.gameObject.activeSelf)
+            {
+                ResetFireball();
+            }
+        }
     }
 
     public void SpawnAttachableFireball()
     {
-        Debug.Log("Calling SpawnFireball");
-       
+       // Debug.Log("Calling SpawnFireball");
+        Debug.Log("FireballParticle:" + fireballParticle);
+
         lifetime = FireballManagement.instance.fireBallLifetime;
-        gameObject.SetActive(true);
- 
+        fireballParticle.Play();
+        fireballTrails.Play();
+
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         PositionInFrontOfWand();
-        
+
         transform.localScale = scale;
         
     }
@@ -70,36 +85,43 @@ public class Spawn : MonoBehaviour
     public void SpawnFireball()
     {
         Debug.Log("Calling SpawnFireball");
-        
+
         lifetime = FireballManagement.instance.fireBallLifetime;
         gameObject.SetActive(true);
- 
+
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         PositionInFrontOfWand();
         Debug.DrawRay(transform.position, transform.forward * THRUST);
-        
+
         transform.localScale = scale;
         rb.AddForce(transform.forward * THRUST);
         beingShot = true;
-       
-
     }
 
-    public void DestroyFireball()
+    public void Explode()
     {
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        FireballManagement.instance.Push(gameObject);
-        gameObject.SetActive(false);
-        transform.localScale = scale;
+        
+        fireballParticle.Stop();
+        fireballTrails.Stop();
+        
         beingShot = false;
+        exploding = true;
+        explosion.gameObject.SetActive(true);
+
+
+    }
+
+    void ResetFireball()
+    {
+        FireballManagement.instance.Push(gameObject);
+        transform.localScale = scale;
     }
 
     public void PositionInFrontOfWand()
     {
-
-        
         SetPosition(wandPivot.position + (wandPivot.forward * OFFSET));
         SetRotation(wandPivot.rotation);
     }
@@ -107,7 +129,6 @@ public class Spawn : MonoBehaviour
     public void SetPosition(Vector3 position)
     {
         transform.position = position;
-    
     }
 
     public void SetLocalPosition(Vector3 localPosition)
@@ -124,27 +145,22 @@ public class Spawn : MonoBehaviour
     {
         transform.rotation = rotation;
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         Debug.Log("Collision!");
-        DestroyFireball();
-    }
-    
-    public void DetachFromParent()
-    {
-        transform.parent = null;
-        
+        Explode();
     }
 
     public void SetFireballManager(Transform go)
     {
         fireballManager = go;
     }
+
     public void SetBeingShot()
     {
         transform.parent = fireballManager;
         //Debug.Log("Being Shot");
         beingShot = true;
     }
-   
 }

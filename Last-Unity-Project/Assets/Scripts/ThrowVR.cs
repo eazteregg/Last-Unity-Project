@@ -61,7 +61,7 @@ public class ThrowVR : MonoBehaviour
 
             if (hand.grabPinchAction.GetState(handType))
             {
-                Debug.Log("Fire1");
+                //Debug.Log("Fire1");
                 //Debug.Log(Spell);
                 if (Spell == "Fireball" && !hand.ObjectIsAttached(attachedFireball))
                 {

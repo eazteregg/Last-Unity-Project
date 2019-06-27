@@ -26,7 +26,7 @@ private void Awake()
     public float fireBallLifetime;
     public float fireBallsPerSecond;
     private float coolDown;
-    GameObject origFireball;
+    public GameObject origFireball;
     
 
 
@@ -39,11 +39,10 @@ private void Awake()
     {
         fireballs = new Stack<GameObject>();
         coolDown = 0.0f;
-        GameObject origFireball = GetComponentInChildren<Spawn>(includeInactive:true).gameObject;
         int maxFireballs = Mathf.CeilToInt(fireBallLifetime * fireBallsPerSecond);
         Debug.Log(maxFireballs.ToString());
-        fireballs.Push(origFireball);
-        origFireball.SetActive(false);
+        
+        
         
         for (int i=1; i < maxFireballs; i++)
         {
