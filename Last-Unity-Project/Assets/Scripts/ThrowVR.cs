@@ -26,7 +26,8 @@ public class ThrowVR : MonoBehaviour
 //        fireballManagement = fireballManager.GetComponent<FireballManagement>();
 //        lightningManagement = lightningManager.GetComponent<LightningManagement>();
         Spell = "Fireball";
-        
+        attachedFireball = null;
+
 
     }
 
@@ -61,13 +62,11 @@ public class ThrowVR : MonoBehaviour
 
             if (hand.grabPinchAction.GetState(handType))
             {
-                //Debug.Log("Fire1");
-                //Debug.Log(Spell);
+               
                 if (Spell == "Fireball" && !hand.ObjectIsAttached(attachedFireball))
                 {
-                    Debug.Log("Spawning Fireball!");
 
-                    attachedFireball = FireballManagement.instance.SpawnAttachableFireball();
+                    attachedFireball = FireballManagement.instance.SpawnAttachableFireball(hand.transform);
                     if (attachedFireball != null)
                         hand.AttachObject(attachedFireball, GrabTypes.Pinch);
                 }

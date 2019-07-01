@@ -27,6 +27,7 @@ private void Awake()
     public float fireBallsPerSecond;
     private float coolDown;
     public GameObject origFireball;
+    public GameObject hand;
     
 
 
@@ -37,6 +38,7 @@ private void Awake()
     
     void Start()
     {
+        
         fireballs = new Stack<GameObject>();
         coolDown = 0.0f;
         int maxFireballs = Mathf.CeilToInt(fireBallLifetime * fireBallsPerSecond);
@@ -47,8 +49,6 @@ private void Awake()
         for (int i=1; i < maxFireballs; i++)
         {
             GameObject newFireball = Instantiate(origFireball, parent: transform);
-            Spawn spawn = newFireball.GetComponent<Spawn>();
-            spawn.SetFireballManager(transform);
             fireballs.Push(newFireball);
         }
         
@@ -81,14 +81,14 @@ private void Awake()
             Spawn spawn = fireball.GetComponent<Spawn>();
             
             
-            spawn.SpawnFireball();
+            spawn.SpawnFireball(hand.transform);
             coolDown = 1 / fireBallsPerSecond;
         }
    
         
     }
 
-    public GameObject SpawnAttachableFireball()
+    public GameObject SpawnAttachableFireball(Transform tf)
     {
         if (coolDown <= 0)
         {
@@ -96,7 +96,7 @@ private void Awake()
             GameObject fireball = fireballs.Pop();
             fireball.GetComponent<Interactable>().enabled = true;
             Spawn spawn = fireball.GetComponent<Spawn>();
-            spawn.SpawnAttachableFireball();
+            spawn.SpawnAttachableFireball(tf);
             coolDown = 1 / fireBallsPerSecond;
 
             return fireball;

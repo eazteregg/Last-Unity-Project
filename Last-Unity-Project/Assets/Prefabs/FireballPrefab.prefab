@@ -10,14 +10,16 @@ GameObject:
   m_Component:
   - component: {fileID: 698123944636647073}
   - component: {fileID: 698123944636647260}
-  - component: {fileID: 698123944636647075}
   - component: {fileID: 698123944636647074}
   - component: {fileID: 698123944636647263}
   - component: {fileID: 698123944636647262}
   - component: {fileID: 698123944636647261}
+  - component: {fileID: 1253260441862813945}
+  - component: {fileID: 7031837668173571080}
+  - component: {fileID: 5762849630616444436}
   m_Layer: 0
   m_Name: FireballPrefab
-  m_TagString: Untagged
+  m_TagString: Spell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,23 +53,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a8b7ec365a34984ca2fea4168d27935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wandPivot: {fileID: 0}
   THRUST: 3000
   OFFSET: 0.01
---- !u!136 &698123944636647075
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 698123944636647078}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.056358997
-  m_Height: 0.18971045
-  m_Direction: 2
-  m_Center: {x: 6.0058805e-11, y: 1.0143573e-16, z: 0.067986906}
 --- !u!54 &698123944636647074
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -83,7 +70,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 3
 --- !u!114 &698123944636647263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +178,46 @@ MonoBehaviour:
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   interactable: {fileID: 0}
+--- !u!135 &1253260441862813945
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698123944636647078}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.04093332
+  m_Center: {x: 0, y: 0, z: 0.12}
+--- !u!136 &7031837668173571080
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698123944636647078}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.056358997
+  m_Height: 0.18971045
+  m_Direction: 2
+  m_Center: {x: 6.0058805e-11, y: 1.0143573e-16, z: 0.067986906}
+--- !u!114 &5762849630616444436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 698123944636647078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17fe3b6458238b24cbf5504a9ad6e64f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1000
 --- !u!1 &3593598058880431061
 GameObject:
   m_ObjectHideFlags: 0
@@ -9601,14 +9628,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4822555230962661210}
-  - component: {fileID: 4338339283591776110}
   - component: {fileID: 2724081118728578357}
   - component: {fileID: 6412912516475474335}
   - component: {fileID: 8405342920766894729}
   - component: {fileID: 1506458451034903087}
   m_Layer: 0
   m_Name: Explosion
-  m_TagString: Spell
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9627,19 +9653,6 @@ Transform:
   m_Father: {fileID: 698123944636647073}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &4338339283591776110
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5065345649459904282}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.04093332
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2724081118728578357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9647,7 +9660,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5065345649459904282}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17fe3b6458238b24cbf5504a9ad6e64f, type: 3}
   m_Name: 
@@ -9722,7 +9735,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5065345649459904282}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4698900941fd7c349851512e08a06f4e, type: 3}
   m_Name: 
