@@ -200,8 +200,12 @@ public class Spawn : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision!");
+        if (!collision.gameObject.CompareTag("Player"))
+        {
+            
+        Debug.Log("Collision: " + collision.gameObject);
         Explode();
+        }
     }
 
     public void SetFireballManager(Transform go)
