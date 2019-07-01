@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1253260441862813945}
   - component: {fileID: 7031837668173571080}
   - component: {fileID: 5762849630616444436}
-  m_Layer: 1
+  m_Layer: 9
   m_Name: FireballPrefab
   m_TagString: Spell
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 4354950945712719078}
   - component: {fileID: 923411660785144599}
   - component: {fileID: 1551363170289494199}
-  m_Layer: 1
+  m_Layer: 9
   m_Name: FireballTrails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4939,7 +4939,7 @@ GameObject:
   - component: {fileID: 8163465851910089033}
   - component: {fileID: 2704981966017269869}
   - component: {fileID: 618851482721637210}
-  m_Layer: 1
+  m_Layer: 9
   m_Name: FireballParticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9644,7 +9644,7 @@ GameObject:
   - component: {fileID: 6412912516475474335}
   - component: {fileID: 8405342920766894729}
   - component: {fileID: 1506458451034903087}
-  m_Layer: 1
+  m_Layer: 9
   m_Name: Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
