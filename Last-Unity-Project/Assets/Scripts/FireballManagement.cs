@@ -79,8 +79,6 @@ private void Awake()
 
             GameObject fireball = fireballs.Dequeue();
             Spawn spawn = fireball.GetComponent<Spawn>();
-            
-            
             spawn.SpawnFireball(hand.transform);
             coolDown = fireBallsPerSecond;
         }

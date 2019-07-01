@@ -25,6 +25,7 @@ public class Spawn : MonoBehaviour
     private bool exploding;
     private CapsuleCollider fireballCollider;
     private SphereCollider explosionCollider;
+    public float colliderGrowth;
 
     // Start is called before the first frame update
 
@@ -86,7 +87,7 @@ public class Spawn : MonoBehaviour
                 ResetFireball();
             }
 
-            explosionCollider.radius += .2f;
+            explosionCollider.radius += 1f * Time.deltaTime;
         }
     }
 
@@ -160,10 +161,11 @@ public class Spawn : MonoBehaviour
     void ResetFireball()
     {
         explosionParticle.Clear();
+        explosionParticle.Stop();
         
         beingShot = false;
         exploding = false;
-        explosionCollider.radius = .1f;
+        explosionCollider.radius = .04f;
         fireballCollider.enabled = false;
         explosionCollider.enabled = false;
         FireballManagement.instance.Enqueue(gameObject);
@@ -211,7 +213,7 @@ public class Spawn : MonoBehaviour
     {
         rb.useGravity = true;
         fireballCollider.enabled = true;
-        transform.parent = fireballManager;
+        
         //Debug.Log("Being Shot");
         beingShot = true;
     }

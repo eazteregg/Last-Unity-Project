@@ -60,8 +60,9 @@ public class ThrowVR : MonoBehaviour
 
                 if (Spell == "Fireball" && attachedFireball)
                 {
+                    Debug.Log("Release - Attached object: " + hand.currentAttachedObject + "    attached Fireball " +attachedFireball);
                     attachedFireball = null;
-                    hand.DetachObject(attachedFireball, true);
+                    //hand.DetachObject(attachedFireball, true);
 
                 }
             }
@@ -72,7 +73,9 @@ public class ThrowVR : MonoBehaviour
                 if (Spell == "Fireball" && !hand.ObjectIsAttached(attachedFireball) && FireballManagement.instance.getCooldown() <= 0)
                 {
                     
+                    
                     attachedFireball = FireballManagement.instance.SpawnAttachableFireball(hand.transform);
+                    Debug.Log("Press - Attached object" + attachedFireball);
                     if (attachedFireball)
                         hand.AttachObject(attachedFireball, GrabTypes.Pinch);
                 }
