@@ -30,10 +30,10 @@ public class Spawn : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("Calling Awake");
         fireballManager = transform.parent;
-        //fireballManagement = transform.parent.gameObject.GetComponent<FireballManagement>();
+        
         scale = new Vector3(2, 2, 2);
+        
         rb = gameObject.GetComponent<Rigidbody>();
         
         fireballParticle = transform.GetChild(0).GetComponent<ParticleSystem>();
@@ -55,8 +55,11 @@ public class Spawn : MonoBehaviour
         explosionCollider.enabled = false;
         
         fireballCollider.enabled = false;
+        
         exploding = false;
+        
         beingShot = false;
+        
         rb.useGravity = false;
 
     }
@@ -64,6 +67,7 @@ public class Spawn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        explosionParticle.gameObject.SetActive(true);
         if (beingShot)
         {
             lifetime -= 1 * Time.deltaTime;
@@ -76,13 +80,13 @@ public class Spawn : MonoBehaviour
         }
 
         if (exploding)
-        {
-            if (!explosionParticle.isPlaying)
+        { //Debug.Log(explosionParticle.IsAlive());
+            if (!explosionParticle.IsAlive())
             {
                 ResetFireball();
             }
 
-            explosionCollider.radius += 2f;
+            explosionCollider.radius += .2f;
         }
     }
 
@@ -97,7 +101,7 @@ public class Spawn : MonoBehaviour
 
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        PositionInFrontOfWand(tf);
+        //PositionInFrontOfWand(tf);
 
         transform.localScale = scale;
         
@@ -113,7 +117,7 @@ public class Spawn : MonoBehaviour
 
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        PositionInFrontOfWand(tf);
+        //PositionInFrontOfWand(tf);
         Debug.DrawRay(transform.position, transform.forward * THRUST);
 
         transform.localScale = scale;
@@ -125,18 +129,25 @@ public class Spawn : MonoBehaviour
     {
         
         Debug.Log("exploding");
+        
         rb.velocity = Vector3.zero;
+        
         rb.angularVelocity = Vector3.zero;
         
+        rb.useGravity = false;
+        
         Debug.Log("stopping Particles");
+        
         fireballParticle.Stop(false,ParticleSystemStopBehavior.StopEmittingAndClear);
         fireballTrails.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
         
         beingShot = false;
         exploding = true;
-        explosionParticle.Clear();
-        explosionParticle.gameObject.SetActive(true);
+        
+        explosionParticle.Simulate(0f, false, true);
+        //explosionParticle.gameObject.SetActive(true);
         explosionParticle.Play();
+        
         Debug.Log("playing explosion:" + explosionParticle.isPlaying);
         fireballCollider.enabled = false;
         explosionCollider.enabled = true;
@@ -148,14 +159,15 @@ public class Spawn : MonoBehaviour
 
     void ResetFireball()
     {
-        rb.useGravity = false;
+        explosionParticle.Clear();
+        
         beingShot = false;
         exploding = false;
         explosionCollider.radius = .1f;
         fireballCollider.enabled = false;
         explosionCollider.enabled = false;
-        FireballManagement.instance.Push(gameObject);
-        transform.localScale = scale;
+        FireballManagement.instance.Enqueue(gameObject);
+        //transform.localScale = scale;
     }
 
     public void PositionInFrontOfWand(Transform hand)
@@ -202,5 +214,10 @@ public class Spawn : MonoBehaviour
         transform.parent = fireballManager;
         //Debug.Log("Being Shot");
         beingShot = true;
+    }
+
+    public void CheckIfActive()
+    {
+        Debug.Log("isActive:" + explosionParticle.gameObject.activeSelf);
     }
 }

@@ -22,7 +22,7 @@ private void Awake()
     
     
     
-    Stack<GameObject> fireballs;
+    Queue<GameObject> fireballs;
     public float fireBallLifetime;
     public float fireBallsPerSecond;
     private float coolDown;
@@ -39,7 +39,7 @@ private void Awake()
     void Start()
     {
         
-        fireballs = new Stack<GameObject>();
+        fireballs = new Queue<GameObject>();
         coolDown = 0.0f;
         int maxFireballs = Mathf.CeilToInt(fireBallLifetime * fireBallsPerSecond);
         Debug.Log(maxFireballs.ToString());
@@ -49,7 +49,7 @@ private void Awake()
         for (int i=1; i < maxFireballs; i++)
         {
             GameObject newFireball = Instantiate(origFireball, parent: transform);
-            fireballs.Push(newFireball);
+            fireballs.Enqueue(newFireball);
         }
         
     }
@@ -63,9 +63,9 @@ private void Awake()
         }
     }
 
-    public void Push(GameObject fireball)
+    public void Enqueue(GameObject fireball)
     {
-        fireballs.Push(fireball);
+        fireballs.Enqueue(fireball);
     }
 
     public void SpawnFireball()
@@ -76,13 +76,13 @@ private void Awake()
         
         if (coolDown <= 0)
         {
-           
-            GameObject fireball = fireballs.Pop();
+
+            GameObject fireball = fireballs.Dequeue();
             Spawn spawn = fireball.GetComponent<Spawn>();
             
             
             spawn.SpawnFireball(hand.transform);
-            coolDown = 1 / fireBallsPerSecond;
+            coolDown = fireBallsPerSecond;
         }
    
         
@@ -93,7 +93,7 @@ private void Awake()
         if (coolDown <= 0)
         {
            
-            GameObject fireball = fireballs.Pop();
+            GameObject fireball = fireballs.Dequeue();
             fireball.GetComponent<Interactable>().enabled = true;
             Spawn spawn = fireball.GetComponent<Spawn>();
             spawn.SpawnAttachableFireball(tf);
@@ -106,7 +106,12 @@ private void Awake()
         return null;
 
 
+    
+    }
 
+    public float getCooldown()
+    {
+        return coolDown;
     }
     private void OnApplicationQuit()
     {

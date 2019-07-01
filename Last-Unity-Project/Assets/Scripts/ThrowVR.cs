@@ -34,11 +34,9 @@ public class ThrowVR : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (hand != null)
-        {
-        //Debug.Log("Hand: " + hand);
-        //Debug.Log("Hand.grabGripAction: " + hand.grabGripAction);
+       // Debug.Log("Holding: " + hand.currentAttachedObject);
+       // if (hand != null)
+       // {
             if (hand.grabGripAction.GetStateDown(handType))
             {
                 Debug.Log("Switching spell...");
@@ -57,19 +55,33 @@ public class ThrowVR : MonoBehaviour
                 if (Spell == "Lightning" && LightningManagement.instance.LightningActive())
                 {
                     LightningManagement.instance.DeactivateLightning();
+                    
+                }
+
+                if (Spell == "Fireball" && attachedFireball)
+                {
+                    attachedFireball = null;
+                    hand.DetachObject(attachedFireball, true);
+
+                }
+            }
+
+            if (hand.grabPinchAction.GetStateDown(handType))
+            {
+                //Debug.Log(attachedFireball);
+                if (Spell == "Fireball" && !hand.ObjectIsAttached(attachedFireball) && FireballManagement.instance.getCooldown() <= 0)
+                {
+                    
+                    attachedFireball = FireballManagement.instance.SpawnAttachableFireball(hand.transform);
+                    if (attachedFireball)
+                        hand.AttachObject(attachedFireball, GrabTypes.Pinch);
                 }
             }
 
             if (hand.grabPinchAction.GetState(handType))
             {
                
-                if (Spell == "Fireball" && !hand.ObjectIsAttached(attachedFireball))
-                {
-
-                    attachedFireball = FireballManagement.instance.SpawnAttachableFireball(hand.transform);
-                    if (attachedFireball != null)
-                        hand.AttachObject(attachedFireball, GrabTypes.Pinch);
-                }
+                
 
                 if (Spell == "Lightning")
                 {
@@ -77,6 +89,6 @@ public class ThrowVR : MonoBehaviour
                 }
             }
         }
-        }
+       // }
 
 }

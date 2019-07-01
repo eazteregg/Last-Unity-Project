@@ -647,9 +647,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireBallLifetime: 4
-  fireBallsPerSecond: 1
+  fireBallsPerSecond: 5
   origFireball: {fileID: 698123944636647078, guid: 123496944da2e534bb89ceca441709c6,
     type: 3}
+  hand: {fileID: 368223340}
 --- !u!4 &1232559571
 Transform:
   m_ObjectHideFlags: 0
@@ -844,7 +845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 0
-  markerActive: 1
+  markerActive: 0
 --- !u!1 &1663169426
 GameObject:
   m_ObjectHideFlags: 0
