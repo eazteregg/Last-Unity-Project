@@ -8,8 +8,11 @@ public class Drawer : MonoBehaviour
     public Camera cam;
     public int SIZE;
     private Hand hand;
+    public Color color;
+    public int radius;
     void Start()
-    {
+    {   
+
         cam = GetComponent<Camera>();
     }
 
@@ -43,7 +46,7 @@ public class Drawer : MonoBehaviour
         pixelUV.y *= tex.height;
 
         Debug.Log("passed returns");
-
+        /*
         //Expand where to draw on both direction
         for (int i = 0; i < SIZE; i++)
         {
@@ -66,6 +69,18 @@ public class Drawer : MonoBehaviour
 
             //Apply
             tex.SetPixel(x, y, Color.red);
+        } */
+        float rSquared = radius * radius;
+        int x = (int)pixelUV.x;
+        int y = (int)pixelUV.y;
+
+        for (int u = x - radius; u < x + radius + 1; u++)
+        {
+            for (int v = y - radius; v < y + radius + 1; v++)
+            {
+                if ((x - u) * (x - u) + (y - v) * (y - v) < rSquared)
+                    tex.SetPixel(u, v, color);
+            }
         }
         tex.Apply();
     }

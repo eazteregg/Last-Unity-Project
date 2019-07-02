@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 854232770}
-  SIZE: 10
+  SIZE: 5
 --- !u!1 &968083560
 GameObject:
   m_ObjectHideFlags: 0
