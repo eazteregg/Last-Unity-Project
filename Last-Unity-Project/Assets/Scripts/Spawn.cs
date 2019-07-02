@@ -43,7 +43,7 @@ public class Spawn : MonoBehaviour
     {
         fireballManager = transform.parent;
         
-        scale = new Vector3(2, 2, 2);
+        scale = new Vector3(    .5f, .5f, .5f);
         
         rb = gameObject.GetComponent<Rigidbody>();
         

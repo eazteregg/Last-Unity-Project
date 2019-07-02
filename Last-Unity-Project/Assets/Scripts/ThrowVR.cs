@@ -1,4 +1,6 @@
 ﻿
+using System;
+using System.Collections;
 using UnityEngine;
 using Valve.VR;
 using Valve.VR.InteractionSystem;
@@ -16,11 +18,22 @@ public class ThrowVR : MonoBehaviour
     private Hand hand;
     private bool fireballAttached;
     private GameObject attachedFireball;
-
+    private string[] spells;
+    private int currentSpell;
+    public int size;
+    public int radius;
+    public Color color;
     // Start is called before the first frame update
 
     void Start()
     {
+        spells = new string[3];
+        spells[0] = "Fireball";
+        spells[1] = "Lightning";
+        spells[2] = "Drawing";
+        
+        currentSpell = 0;
+        
         hand = gameObject.GetComponent<Hand>();
 //        fireballManagement = FireballManagement.instance;
 //        fireballManagement = fireballManager.GetComponent<FireballManagement>();
@@ -40,14 +53,9 @@ public class ThrowVR : MonoBehaviour
             if (hand.grabGripAction.GetStateDown(handType))
             {
                 Debug.Log("Switching spell...");
-                if (Spell == "Fireball")
-                {
-                    Spell = "Lightning";
-                }
-                else if (Spell == "Lightning")
-                {
-                    Spell = "Fireball";
-                }
+                currentSpell += 1;
+                Spell = spells[currentSpell % 3];
+                
             }
 
             if (hand.grabPinchAction.GetStateUp(handType))
@@ -57,14 +65,7 @@ public class ThrowVR : MonoBehaviour
                     LightningManagement.instance.DeactivateLightning();
                     
                 }
-
-                if (Spell == "Fireball" && attachedFireball)
-                {
-                    Debug.Log("Release - Attached object: " + hand.currentAttachedObject + "    attached Fireball " +attachedFireball);
-                    attachedFireball = null;
-                    //hand.DetachObject(attachedFireball, true);
-
-                }
+                
             }
 
             if (hand.grabPinchAction.GetStateDown(handType))
@@ -89,6 +90,44 @@ public class ThrowVR : MonoBehaviour
                 if (Spell == "Lightning")
                 {
                     LightningManagement.instance.ActivateLightning();
+                }
+                else if (Spell == "Drawing")
+                {    
+                    
+                    RaycastHit hit;
+                    Debug.DrawRay(transform.position, transform.forward, Color.red);
+                    if (!Physics.Raycast(transform.position, transform.forward, out hit, 50))
+                        return;
+
+                    Renderer rend = hit.transform.GetComponent<Renderer>();
+                    MeshCollider meshCollider = hit.collider as MeshCollider;
+                    
+                    if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider == null)
+                        return;
+
+                    Debug.Log("passed text");
+
+                    Texture2D tex = rend.material.mainTexture as Texture2D;
+                    Vector2 pixelUV = hit.textureCoord;
+
+                    pixelUV.x *= tex.width;
+                    pixelUV.y *= tex.height;
+
+                    Debug.Log("passed returns");
+
+                    float rSquared = radius * radius;
+                    int x = (int)pixelUV.x;
+                    int y = (int)pixelUV.y;
+
+                    for (int u = x - radius; u < x + radius + 1; u++)
+                    {
+                        for (int v = y - radius; v < y + radius + 1; v++)
+                        {
+                            if ((x - u) * (x - u) + (y - v) * (y - v) < rSquared)
+                                tex.SetPixel(u, v, color);
+                        }
+                    }
+                    tex.Apply();
                 }
             }
         }

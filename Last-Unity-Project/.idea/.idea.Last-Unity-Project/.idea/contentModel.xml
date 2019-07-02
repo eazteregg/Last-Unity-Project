@@ -6,10 +6,18 @@
     <e p="C:\Users\experiment\Documents\GitHub\Last-Unity-Project\Last-Unity-Project" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="Explode.cs" t="Include" />
+        <e p="Destructible.cs" t="Include" />
+        <e p="Models" t="Include">
+          <e p="_3D Scifi Kit Starter Kit" t="Include">
+            <e p="_Docs" t="Include">
+              <e p="Doc.txt" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="Scripts" t="Include">
           <e p="Damage.cs" t="Include" />
           <e p="Destruction.cs" t="Include" />
+          <e p="Drawer.cs" t="Include" />
           <e p="FireballManagement.cs" t="Include" />
           <e p="LightningManagement.cs" t="Include" />
           <e p="Painting.cs" t="Include" />
@@ -18,6 +26,7 @@
           <e p="ShootVR.cs" t="Include" />
           <e p="Spawn.cs" t="Include" />
           <e p="ThrowVR.cs" t="Include" />
+          <e p="VRDrawer.cs" t="Include" />
         </e>
         <e p="SteamVR" t="Include">
           <e p="Editor" t="Include">
@@ -309,7 +318,6 @@
           <e p="SteamVR_Input_ActionSets.cs" t="Include" />
           <e p="SteamVR_Input_Initialization.cs" t="Include" />
         </e>
-        <e p="TestScript.cs" t="Include" />
       </e>
       <e p="Last-Unity-Project.sln" t="IncludeFlat" />
       <e p="Library" t="ExcludeRecursive" />

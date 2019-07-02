@@ -212,6 +212,9 @@ MonoBehaviour:
     actionPath: /actions/default/in/GrabGrip
     needsReinit: 0
   handType: 2
+  size: 20
+  radius: 10
+  color: {r: 0.24527836, g: 0, b: 1, a: 0}
 --- !u!1 &534669902
 GameObject:
   m_ObjectHideFlags: 0
