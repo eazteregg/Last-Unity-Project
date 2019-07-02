@@ -7,7 +7,6 @@ using Valve.VR.InteractionSystem;
 
 public class FireballManagement : MonoBehaviour
 {
-    
 #region Singleton
 
 public static FireballManagement instance;
@@ -21,7 +20,7 @@ private void Awake()
 #endregion
     
     
-    
+    public AudioSource m_AudioSource;   
     Queue<GameObject> fireballs;
     public float fireBallLifetime;
     public float fireBallsPerSecond;
@@ -38,7 +37,6 @@ private void Awake()
     
     void Start()
     {
-        
         fireballs = new Queue<GameObject>();
         coolDown = 0.0f;
         int maxFireballs = Mathf.CeilToInt(fireBallLifetime * fireBallsPerSecond);
@@ -48,6 +46,8 @@ private void Awake()
         
         for (int i=1; i < maxFireballs; i++)
         {
+            //m_AudioSource = GetComponent<AudioSource>();
+            //m_AudioSource.Stop();
             GameObject newFireball = Instantiate(origFireball, parent: transform);
             fireballs.Enqueue(newFireball);
         }

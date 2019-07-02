@@ -3,7 +3,10 @@ guid: a0020000ed3188a4194b205ffa7d42ba
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - wandPivot: {instanceID: 0}
+  - m_AudioSource: {instanceID: 0}
+  - Lighting: {fileID: 8300000, guid: 554384be5f92d8f4e8caf4b9557820aa, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

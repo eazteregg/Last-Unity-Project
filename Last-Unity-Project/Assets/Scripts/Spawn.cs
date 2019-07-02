@@ -28,6 +28,16 @@ public class Spawn : MonoBehaviour
     public float colliderGrowth;
 
     // Start is called before the first frame update
+    
+    
+    //OB
+    public AudioSource m_AudioSource;
+    public AudioClip m_Charge;
+    public AudioClip m_TravelFire;
+    public AudioClip m_explotion; 
+    private bool is_traveling;
+    private bool is_Attached;
+    private bool is_exploted;
 
     void Awake()
     {
@@ -62,15 +72,42 @@ public class Spawn : MonoBehaviour
         beingShot = false;
         
         rb.useGravity = false;
+        
+        
+        //OB
+        is_traveling = false;
+        is_Attached = false;
+        is_exploted = false;
+        m_AudioSource = GetComponent<AudioSource>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+        //OB
+        if (is_Attached)
+        {
+            m_AudioSource.PlayOneShot(m_Charge);
+
+              
+            is_Attached = false;     
+        }
+        
+        
+        
         explosionParticle.gameObject.SetActive(true);
         if (beingShot)
         {
+            //OB 
+            if (is_traveling)
+            {
+                m_AudioSource.PlayOneShot(m_TravelFire);
+                is_traveling = false;
+                is_Attached = false;
+            }
+            
             lifetime -= 1 * Time.deltaTime;
             Vector3 target = rb.velocity.normalized;
             transform.forward = target;
@@ -82,6 +119,7 @@ public class Spawn : MonoBehaviour
 
         if (exploding)
         { //Debug.Log(explosionParticle.IsAlive());
+            
             if (!explosionParticle.IsAlive())
             {
                 ResetFireball();
@@ -106,6 +144,9 @@ public class Spawn : MonoBehaviour
 
         transform.localScale = scale;
         
+        //OB
+        is_Attached = true;
+        
     }
     
 
@@ -124,6 +165,9 @@ public class Spawn : MonoBehaviour
         transform.localScale = scale;
         rb.AddForce(transform.forward * THRUST);
         beingShot = true;
+        
+        //OB
+        m_AudioSource.PlayOneShot(m_Charge);
     }
 
     public void Explode()
@@ -145,9 +189,22 @@ public class Spawn : MonoBehaviour
         beingShot = false;
         exploding = true;
         
+        //OB
+        is_exploted = true;
+        
         explosionParticle.Simulate(0f, false, true);
         //explosionParticle.gameObject.SetActive(true);
         explosionParticle.Play();
+
+
+        if (is_exploted)
+        {
+            m_AudioSource.Stop();
+            m_AudioSource.PlayOneShot(m_explotion);
+            is_exploted = false;
+
+        }
+        
         
         Debug.Log("playing explosion:" + explosionParticle.isPlaying);
         fireballCollider.enabled = false;
@@ -220,6 +277,11 @@ public class Spawn : MonoBehaviour
         
         //Debug.Log("Being Shot");
         beingShot = true;
+        
+        //OB
+        
+        
+        is_traveling = true;
     }
 
     public void CheckIfActive()
