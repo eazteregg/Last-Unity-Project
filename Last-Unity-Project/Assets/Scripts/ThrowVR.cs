@@ -105,15 +105,11 @@ public class ThrowVR : MonoBehaviour
                     if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider == null)
                         return;
 
-                    Debug.Log("passed text");
-
                     Texture2D tex = rend.material.mainTexture as Texture2D;
                     Vector2 pixelUV = hit.textureCoord;
 
                     pixelUV.x *= tex.width;
                     pixelUV.y *= tex.height;
-
-                    Debug.Log("passed returns");
 
                     float rSquared = radius * radius;
                     int x = (int)pixelUV.x;

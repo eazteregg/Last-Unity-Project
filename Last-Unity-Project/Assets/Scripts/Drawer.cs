@@ -8,6 +8,8 @@ public class Drawer : MonoBehaviour
     public Camera cam;
     public int SIZE;
     private Hand hand;
+    public int radius;
+    public Color color;
     void Start()
     {
         cam = GetComponent<Camera>();
@@ -25,12 +27,6 @@ public class Drawer : MonoBehaviour
         Renderer rend = hit.transform.GetComponent<Renderer>();
         MeshCollider meshCollider = hit.collider as MeshCollider;
 
-        Debug.Log(rend.sharedMaterial);
-        Debug.Log(rend.sharedMaterial.mainTexture);
-        Debug.Log(meshCollider);
-
-
-
         if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider == null)
             return;
 
@@ -44,28 +40,17 @@ public class Drawer : MonoBehaviour
 
         Debug.Log("passed returns");
 
-        //Expand where to draw on both direction
-        for (int i = 0; i < SIZE; i++)
+        float rSquared = radius * radius;
+        int x = (int)pixelUV.x;
+        int y = (int)pixelUV.y;
+
+        for (int u = x - radius; u < x + radius + 1; u++)
         {
-            int x = (int)pixelUV.x;
-            int y = (int)pixelUV.y;
-
-            //Increment the X and Y
-            x += i;
-            y += i;
-
-            //Apply
-            tex.SetPixel(x, y, Color.red);
-            Debug.Log("in for");
-            //De-increment the X and Y
-            x = (int)pixelUV.x;
-            y = (int)pixelUV.y;
-
-            x -= i;
-            y -= i;
-
-            //Apply
-            tex.SetPixel(x, y, Color.red);
+            for (int v = y - radius; v < y + radius + 1; v++)
+            {
+                if ((x - u) * (x - u) + (y - v) * (y - v) < rSquared)
+                    tex.SetPixel(u, v, color);
+            }
         }
         tex.Apply();
     }
