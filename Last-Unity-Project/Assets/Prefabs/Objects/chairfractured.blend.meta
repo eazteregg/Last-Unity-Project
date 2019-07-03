@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: aaf960a83b50bcf4ba607094b978529e
+guid: c582bd4f127d941459bbce704a6bff16
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -12,6 +12,10 @@ ModelImporter:
     400004: Cube_cell_004
     400006: Cube_cell_005
     2100000: Material_001
+    2100002: cushions
+    2100004: plastic_001
+    2100006: plastic
+    2100008: plastic_002
     2300000: Cube_cell_003
     2300002: Cube_cell_004
     2300004: Cube_cell_005

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.GameCenter;
 using Valve.VR.InteractionSystem;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -28,75 +29,74 @@ public class Spawn : MonoBehaviour
     public float colliderGrowth;
 
     // Start is called before the first frame update
-    
-    
+
+
     //OB
     public AudioSource m_AudioSource;
     public AudioClip m_Charge;
     public AudioClip m_TravelFire;
-    public AudioClip m_explotion; 
+    public AudioClip m_explotion;
     private bool is_traveling;
     private bool is_Attached;
     private bool is_exploted;
+    public float explosiveForce;
+    public float explosionRadius;
 
     void Awake()
     {
         fireballManager = transform.parent;
-        
-        scale = new Vector3(    .5f, .5f, .5f);
-        
+
+        scale = new Vector3(.5f, .5f, .5f);
+
         rb = gameObject.GetComponent<Rigidbody>();
-        
+
         fireballParticle = transform.GetChild(0).GetComponent<ParticleSystem>();
-        
+
         fireballTrails = transform.GetChild(1).GetComponent<ParticleSystem>();
-        
+
         explosionParticle = transform.GetChild(2).GetComponent<ParticleSystem>();
-        
+
         fireballParticle.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
-        
+
         fireballTrails.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
-        
+
         explosionParticle.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
-        
+
         fireballCollider = GetComponent<CapsuleCollider>();
-        
-        explosionCollider = GetComponent<SphereCollider>();
-        
-        explosionCollider.enabled = false;
-        
+
+        //explosionCollider = GetComponent<SphereCollider>();
+
+        //explosionCollider.enabled = false;
+
         fireballCollider.enabled = false;
-        
+
         exploding = false;
-        
+
         beingShot = false;
-        
+
         rb.useGravity = false;
-        
-        
+
+
         //OB
         is_traveling = false;
         is_Attached = false;
         is_exploted = false;
         m_AudioSource = GetComponent<AudioSource>();
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         //OB
         if (is_Attached)
         {
             m_AudioSource.PlayOneShot(m_Charge);
 
-              
-            is_Attached = false;     
+
+            is_Attached = false;
         }
-        
-        
-        
+
+
         explosionParticle.gameObject.SetActive(true);
         if (beingShot)
         {
@@ -107,31 +107,32 @@ public class Spawn : MonoBehaviour
                 is_traveling = false;
                 is_Attached = false;
             }
-            
+
             lifetime -= 1 * Time.deltaTime;
             Vector3 target = rb.velocity.normalized;
             transform.forward = target;
             if (lifetime <= 0)
             {
-               Explode();
+                Explode();
             }
         }
 
         if (exploding)
-        { //Debug.Log(explosionParticle.IsAlive());
-            
+        {
+            //Debug.Log(explosionParticle.IsAlive());
+
             if (!explosionParticle.IsAlive())
             {
                 ResetFireball();
             }
 
-            explosionCollider.radius += 1f * Time.deltaTime;
+            //explosionCollider.radius += 1f * Time.deltaTime;
         }
     }
 
     public void SpawnAttachableFireball(Transform tf)
     {
-       // Debug.Log("Calling SpawnFireball");
+        // Debug.Log("Calling SpawnFireball");
         Debug.Log("FireballParticle:" + fireballParticle);
 
         lifetime = FireballManagement.instance.fireBallLifetime;
@@ -143,12 +144,11 @@ public class Spawn : MonoBehaviour
         //PositionInFrontOfWand(tf);
 
         transform.localScale = scale;
-        
+
         //OB
         is_Attached = true;
-        
     }
-    
+
 
     public void SpawnFireball(Transform tf)
     {
@@ -165,33 +165,32 @@ public class Spawn : MonoBehaviour
         transform.localScale = scale;
         rb.AddForce(transform.forward * THRUST);
         beingShot = true;
-        
+
         //OB
         m_AudioSource.PlayOneShot(m_Charge);
     }
 
     public void Explode()
     {
-        
         Debug.Log("exploding");
-        
+
         rb.velocity = Vector3.zero;
-        
+
         rb.angularVelocity = Vector3.zero;
-        
+
         rb.useGravity = false;
-        
+
         Debug.Log("stopping Particles");
-        
-        fireballParticle.Stop(false,ParticleSystemStopBehavior.StopEmittingAndClear);
+
+        fireballParticle.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
         fireballTrails.Stop(false, ParticleSystemStopBehavior.StopEmittingAndClear);
-        
+
         beingShot = false;
         exploding = true;
-        
+
         //OB
         is_exploted = true;
-        
+
         explosionParticle.Simulate(0f, false, true);
         //explosionParticle.gameObject.SetActive(true);
         explosionParticle.Play();
@@ -202,24 +201,20 @@ public class Spawn : MonoBehaviour
             m_AudioSource.Stop();
             m_AudioSource.PlayOneShot(m_explotion);
             is_exploted = false;
-
         }
-        
-        
+
+
         Debug.Log("playing explosion:" + explosionParticle.isPlaying);
         fireballCollider.enabled = false;
-        explosionCollider.enabled = true;
-
-
+        // explosionCollider.enabled = true;
     }
 
-  
 
     void ResetFireball()
     {
         explosionParticle.Clear();
         explosionParticle.Stop();
-        
+
         beingShot = false;
         exploding = false;
         explosionCollider.radius = .04f;
@@ -257,30 +252,40 @@ public class Spawn : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collision.gameObject.CompareTag("Player"))
-        {
-            
-        Debug.Log("Collision: " + collision.gameObject);
-        Explode();
-        }
-    }
+        GameObject other = collision.gameObject;
 
-    public void SetFireballManager(Transform go)
-    {
-        fireballManager = go;
+
+        if (!other.CompareTag("Player") && !other.CompareTag("Spell"))
+        {
+            Debug.Log("Collision: " + collision.gameObject);
+
+            Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
+
+            foreach (Collider collider in colliders)
+            {
+                if (!collider.gameObject.CompareTag("Player") && !collider.gameObject.CompareTag("Spell"))
+                {
+                    Debug.Log("Exploding: " + collider.gameObject);
+                    Rigidbody rb = collider.GetComponent<Rigidbody>();
+                    rb.AddExplosionForce(explosiveForce, other.transform.position, explosionRadius, 3f);
+                }
+            }
+
+            Explode();
+        }
     }
 
     public void SetBeingShot()
     {
         rb.useGravity = true;
         fireballCollider.enabled = true;
-        
+
         //Debug.Log("Being Shot");
         beingShot = true;
-        
+
         //OB
-        
-        
+
+
         is_traveling = true;
     }
 

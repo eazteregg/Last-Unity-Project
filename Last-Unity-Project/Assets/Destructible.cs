@@ -5,12 +5,27 @@ using UnityEngine;
 public class Destructible : MonoBehaviour
 {
     public GameObject destroyedVersion;
-    private void OnCollisionEnter(Collision other)
+    private GameObject origVersion;
+    private Transform pivot;
+    
+    public void Start()
     {
-        if (other.gameObject.tag == "Spell")
+        pivot = transform.parent;
+        destroyedVersion.SetActive(false);
+        destroyedVersion = Instantiate(destroyedVersion, pivot.position, Quaternion.identity);
+        
+    }
+    private void OnCollisionEnter(Collision other)
+   
+    
+    {
+        
+        if (other.gameObject.CompareTag("Spell"))
         {
-            Destroy(gameObject);
-            Instantiate(destroyedVersion, transform.position, transform.rotation);
+            Debug.Log("Deactivating!!");
+            gameObject.SetActive(false);
+            destroyedVersion.SetActive(true);
+            
         }
     }
 }

@@ -1,13 +1,14 @@
 fileFormatVersion: 2
-guid: 6dc0ed4cd9cc5c74ebaa5fab05ad9463
+guid: 761cb36b546109c42850a558709e8849
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: connector
+    2100000: connectors
     2100002: frame
-    2100004: frame_003
+    2100004: connector
+    2100006: frame_003
     2300000: //RootNode
     3300000: //RootNode
     4300000: bookcase

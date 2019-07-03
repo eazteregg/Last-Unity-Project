@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9521e0736bb394745beae1fe1532d5a4
+guid: aa5042388275cb84fa896ee5dc5b5446
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -11,6 +11,9 @@ ModelImporter:
     400004: shatteredbookcase2_2
     2100000: connectors
     2100002: frame
+    2100004: connector_001
+    2100006: frame_002
+    2100008: connector
     2300000: shatteredbookcase2_1
     2300002: shatteredbookcase2_2
     3300000: shatteredbookcase2_1
@@ -96,10 +99,10 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

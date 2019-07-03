@@ -1,59 +1,16 @@
 fileFormatVersion: 2
-guid: 9dd29426742daa744935e906bb9e1edd
+guid: d5786c632cbccf44786da8fc90fd951e
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: bookcase
-    100002: //RootNode
-    100004: shatteredbookcase1_03
-    100006: shatteredbookcase1_0_1
-    100008: shatteredbookcase1_0_2
-    100010: shatteredbookcase1_0_4
-    100012: shatteredbookcase1_1
-    100014: shatteredbookcase1_2
-    100016: shatteredbookcase2_1
-    100018: shatteredbookcase2_2
-    400000: bookcase
-    400002: //RootNode
-    400004: shatteredbookcase1_03
-    400006: shatteredbookcase1_0_1
-    400008: shatteredbookcase1_0_2
-    400010: shatteredbookcase1_0_4
-    400012: shatteredbookcase1_1
-    400014: shatteredbookcase1_2
-    400016: shatteredbookcase2_1
-    400018: shatteredbookcase2_2
-    2100000: frame_001
-    2100002: connectors_001
-    2100004: connectors
-    2100006: frame
-    2300000: bookcase
-    2300002: shatteredbookcase1_03
-    2300004: shatteredbookcase1_0_1
-    2300006: shatteredbookcase1_0_2
-    2300008: shatteredbookcase1_0_4
-    2300010: shatteredbookcase1_1
-    2300012: shatteredbookcase1_2
-    2300014: shatteredbookcase2_1
-    2300016: shatteredbookcase2_2
-    3300000: bookcase
-    3300002: shatteredbookcase1_03
-    3300004: shatteredbookcase1_0_1
-    3300006: shatteredbookcase1_0_2
-    3300008: shatteredbookcase1_0_4
-    3300010: shatteredbookcase1_1
-    3300012: shatteredbookcase1_2
-    3300014: shatteredbookcase2_1
-    3300016: shatteredbookcase2_2
-    4300000: shatteredbookcase1_0_4
-    4300002: shatteredbookcase1_0_2
-    4300004: shatteredbookcase1_03
-    4300006: shatteredbookcase1_0_1
-    4300008: shatteredbookcase2_1
-    4300010: shatteredbookcase2_2
-    4300012: bookcase
-    4300014: shatteredbookcase1_1
-    4300016: shatteredbookcase1_2
+    100000: //RootNode
+    400000: //RootNode
+    2100000: cover
+    2100002: pages
+    2100004: ridges
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Cube
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7d7f64adf127ee64689cde5fad3355fe
+guid: faa5678cc41a0784cab0b3bbe71b47b6
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -19,6 +19,8 @@ ModelImporter:
     2100002: frame_003
     2100004: frame_002
     2100006: connectors_002
+    2100008: connector
+    2100010: frame
     2300000: shatteredbookcase1_000
     2300002: shatteredbookcase1_03
     2300004: shatteredbookcase1_0_1
