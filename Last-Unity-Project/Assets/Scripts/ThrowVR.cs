@@ -93,7 +93,6 @@ public class ThrowVR : MonoBehaviour
                 }
                 else if (Spell == "Drawing")
                 {    
-                    
                     RaycastHit hit;
                     Debug.DrawRay(transform.position, transform.forward, Color.red);
                     if (!Physics.Raycast(transform.position, transform.forward, out hit, 50))
@@ -104,13 +103,14 @@ public class ThrowVR : MonoBehaviour
                     
                     if (rend == null || rend.sharedMaterial == null || rend.sharedMaterial.mainTexture == null || meshCollider == null)
                         return;
-
+                    
                     Texture2D tex = rend.material.mainTexture as Texture2D;
                     Vector2 pixelUV = hit.textureCoord;
-
+                    if (!tex.isReadable)
+                        return;
                     pixelUV.x *= tex.width;
                     pixelUV.y *= tex.height;
-
+                    Debug.Log("REACHED");
                     float rSquared = radius * radius;
                     int x = (int)pixelUV.x;
                     int y = (int)pixelUV.y;
@@ -120,6 +120,7 @@ public class ThrowVR : MonoBehaviour
                         for (int v = y - radius; v < y + radius + 1; v++)
                         {
                             if ((x - u) * (x - u) + (y - v) * (y - v) < rSquared)
+                                
                                 tex.SetPixel(u, v, color);
                         }
                     }

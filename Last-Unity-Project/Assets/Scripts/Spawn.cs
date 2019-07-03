@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
@@ -25,7 +26,7 @@ public class Spawn : MonoBehaviour
     private ParticleSystem explosionParticle;
     private bool exploding;
     private CapsuleCollider fireballCollider;
-    private SphereCollider explosionCollider;
+    //private SphereCollider explosionCollider;
     public float colliderGrowth;
 
     // Start is called before the first frame update
@@ -217,9 +218,9 @@ public class Spawn : MonoBehaviour
 
         beingShot = false;
         exploding = false;
-        explosionCollider.radius = .04f;
+        //explosionCollider.radius = .04f;
         fireballCollider.enabled = false;
-        explosionCollider.enabled = false;
+        //explosionCollider.enabled = false;
         FireballManagement.instance.Enqueue(gameObject);
         //transform.localScale = scale;
     }
@@ -266,8 +267,13 @@ public class Spawn : MonoBehaviour
                 if (!collider.gameObject.CompareTag("Player") && !collider.gameObject.CompareTag("Spell"))
                 {
                     Debug.Log("Exploding: " + collider.gameObject);
+                    
                     Rigidbody rb = collider.GetComponent<Rigidbody>();
+                    if (rb)
+                    {
+                        
                     rb.AddExplosionForce(explosiveForce, other.transform.position, explosionRadius, 3f);
+                    }
                 }
             }
 
