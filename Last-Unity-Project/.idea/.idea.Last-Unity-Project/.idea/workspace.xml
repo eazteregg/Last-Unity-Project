@@ -70,7 +70,7 @@
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/Destruction.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
               <folding>
                 <marker date="1561469793229" expanded="false" signature="6:78" ph="..." />
                 <marker date="1561469793229" expanded="true" signature="120:879" ph="{...}" />
@@ -90,7 +90,7 @@
         <entry file="file://$PROJECT_DIR$/Assets/Fantasy Monster(wizard) Demo/Environment/Scripts/MoveCTRLDemo.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-195">
-              <caret line="55" column="32" lean-forward="true" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
+              <caret line="55" column="32" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
               <folding>
                 <marker date="1562172474424" expanded="false" signature="6:149" ph="..." />
                 <marker date="1562172474424" expanded="true" signature="193:8845" ph="{...}" />
@@ -145,7 +145,7 @@
         <entry file="file://$PROJECT_DIR$/Assets/Scripts/AI Scripts/BigSpider.cs">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="285">
-              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+              <caret line="22" selection-start-line="22" selection-end-line="22" />
               <folding>
                 <marker date="1562153956000" expanded="false" signature="6:100" ph="..." />
                 <marker date="1562153956000" expanded="true" signature="140:389" ph="{...}" />
@@ -395,7 +395,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="405" />
     <option name="y" value="-14" />
     <option name="width" value="1243" />
@@ -499,7 +499,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1176" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2260128" />
@@ -2025,7 +2025,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/AI Scripts/BigSpider.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
           <folding>
             <marker date="1562153956000" expanded="false" signature="6:100" ph="..." />
             <marker date="1562153956000" expanded="true" signature="140:389" ph="{...}" />
@@ -2038,7 +2038,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/Fantasy Monster(wizard) Demo/Environment/Scripts/MoveCTRLDemo.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-195">
-          <caret line="55" column="32" lean-forward="true" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
+          <caret line="55" column="32" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
           <folding>
             <marker date="1562172474424" expanded="false" signature="6:149" ph="..." />
             <marker date="1562172474424" expanded="true" signature="193:8845" ph="{...}" />
@@ -2091,7 +2091,7 @@
     <entry file="file://$PROJECT_DIR$/Assets/Scripts/Destruction.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
-          <caret line="6" lean-forward="true" selection-start-line="6" selection-end-line="6" />
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
           <folding>
             <marker date="1561469793229" expanded="false" signature="6:78" ph="..." />
             <marker date="1561469793229" expanded="true" signature="120:879" ph="{...}" />
