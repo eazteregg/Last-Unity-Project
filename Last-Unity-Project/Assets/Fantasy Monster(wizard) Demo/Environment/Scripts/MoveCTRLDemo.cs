@@ -9,14 +9,15 @@ public class MoveCTRLDemo : MonoBehaviour {
 
     public int Xpos;
     public int Zpos;
+    public float Ypos;
     public GameObject NPCDest;
 
     public float health = 3;
 
     public GameObject ThePlayer;
     public float TargetDistance;
-    public float NoticeRange = 50;
-    public float AllowedRange = 40;
+    public float NoticeRange = 0;
+    public float AllowedRange = 0;
     public GameObject TheEnemy;
     public float EnemySpeed;
     public int AttackTrigger;
@@ -44,7 +45,8 @@ public class MoveCTRLDemo : MonoBehaviour {
         
         Xpos = UnityEngine.Random.Range(13, 36);
         Zpos = UnityEngine.Random.Range(-6, 6);
-        NPCDest.transform.position = new Vector3(Xpos, 0.06f, Zpos);
+        Ypos = transform.position.y;
+        NPCDest.transform.position = new Vector3(Xpos, 0, Zpos);
         StartCoroutine(RunRandomWalk());
 
         r = overlayImage.color.r;
@@ -324,7 +326,7 @@ public class MoveCTRLDemo : MonoBehaviour {
             yield return new WaitForSeconds(5);
             Xpos = UnityEngine.Random.Range(13, 36);
             Zpos = UnityEngine.Random.Range(-6, 6);
-            NPCDest.transform.position = new Vector3(Xpos, 0.06f, Zpos);
+            NPCDest.transform.position = new Vector3(Xpos, 0, Zpos);
             StartCoroutine(RunRandomWalk());
         
     }
